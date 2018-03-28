@@ -1,0 +1,18 @@
+section {
+  h1 {
+    text-align: center;
+    margin: 50px 0 15px;
+  }
+  mat-card {
+    max-width: 500px;
+    margin: 0 auto;
+    form {
+      display: flex;
+      flex-flow: column nowrap;
+    }
+    button {
+      width: 150px;
+      margin: 0 auto 15px;
+    }
+  }
+}
