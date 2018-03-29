@@ -1,0 +1,21 @@
+<section>
+  <h1>Registration</h1>
+  <mat-card>
+    <form [formGroup]="form" (submit)="submitForm($event, form.value)">
+      <mat-form-field class="">
+        <input matInput placeholder="Name" formControlName="name" type="text">
+      </mat-form-field>
+      <mat-form-field class="">
+        <input matInput placeholder="Email" formControlName="email" type="email">
+      </mat-form-field>
+      <mat-form-field class="">
+        <input matInput placeholder="Password" formControlName="password" type="password">
+      </mat-form-field>
+      <mat-form-field class="">
+        <input matInput placeholder="URL avatar" formControlName="avatar" type="text">
+      </mat-form-field>
+      <button mat-raised-button type="submit">Registration</button>
+      <button mat-raised-button [routerLink]="['/login']">Sign In</button>
+    </form>
+  </mat-card>
+</section>

@@ -12,6 +12,7 @@ import { Route, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CommentService } from './services/comment/comment.service';
+import { RegistrationComponent } from './components/auth/registration/registration.component';
 
 const routes: Route[] = [
   {
@@ -24,11 +25,12 @@ const routes: Route[] = [
   },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegistrationComponent },
   { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegistrationComponent],
   imports: [
     BrowserModule,
     MatSnackBarModule,
