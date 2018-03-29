@@ -21,6 +21,7 @@ import { LoginService } from './services/login/login.service';
 import { ProfileIconComponent } from './components/layout/icons/profile-icon/profile-icon.component';
 import { MatIconModule } from '@angular/material';
 import { HomeModule } from './components/home/home.module';
+import { SharedModule } from './shared/shared.modules';
 
 const routes: Route[] = [
   {
@@ -39,19 +40,13 @@ const routes: Route[] = [
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, RegistrationComponent, LogoutComponent],
   imports: [
-    BrowserModule,
-    MatSnackBarModule,
-    FormsModule,
-    HttpModule,
-    LoginModule,
     BrowserAnimationsModule,
+    SharedModule,
+    LoginModule,
     HttpClientModule,
-    ReactiveFormsModule,
     ToolBarModule,
     SideBarModule,
-    MatIconModule,
     HomeModule,
-    MatSidenavModule,
     RouterModule.forRoot(routes)
   ],
   providers: [AuthGuard, CommentService, LoginService],

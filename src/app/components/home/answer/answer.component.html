@@ -1,3 +1,16 @@
-<p>
-  answer works!
-</p>
+<section>
+  <mat-list>
+    <mat-list-item *ngFor="let answer of answers">
+      <span>
+        <b>Message: </b>
+      </span>
+      <p>{{answer.message}}</p>
+    </mat-list-item>
+  </mat-list>
+  <form [formGroup]="form" (submit)="submitForm($event, form.value)">
+    <mat-form-field class="">
+      <input matInput placeholder="Answer" formControlName="answer" type="text">
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="form.invalid">Add Answer</button>
+  </form>
+</section>

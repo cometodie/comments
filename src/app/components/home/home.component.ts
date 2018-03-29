@@ -72,13 +72,7 @@ export class HomeComponent implements OnInit {
   }
 
   getReaiId(comment) {
-    let comment_id = 0;
-    if (comment.hasOwnProperty('id')) {
-      comment_id = comment.id;
-    } else {
-      comment_id = comment.comment_id;
-    }
-    return comment_id;
+    return comment.hasOwnProperty('id') ? comment.id : comment.comment_id;
   }
 
   deleteComment(comment) {

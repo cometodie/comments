@@ -28,6 +28,8 @@
           </span>
           <p>{{comment.message}}</p>
           <button mat-raised-button (click)="deleteComment(comment)" [disabled]="isOwnComment(comment)">Delete</button>
+          <mat-divider></mat-divider>
+          <app-answer [commentId]="getReaiId(comment)" [user]="user"></app-answer>
         </mat-list-item>
       </mat-list>
     </div>

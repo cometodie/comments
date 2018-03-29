@@ -1,11 +1,13 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="flex-row">
-    <div class="container" (click)="toggleSideBar()" [ngClass]="{'change': isOpen}">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
+    <div class="flex-row">
+      <div class="container" (click)="toggleSideBar()" [ngClass]="{'change': isOpen}">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <h1>Comments System</h1>
     </div>
-    <h1>Comments System</h1>
     <div *ngIf="!!user" class="profile-block">
       <img src="{{getAvatar()}}">
       <span>{{user.email}}</span>

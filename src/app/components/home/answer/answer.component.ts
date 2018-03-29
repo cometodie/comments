@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { AnswerService } from '../../../services/answer/answer.service';
+import { User } from '../../../models/user';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-answer',
@@ -6,10 +10,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./answer.component.scss']
 })
 export class AnswerComponent implements OnInit {
+  @Input() commentId: number;
+  @Input() user: User;
+  form: FormGroup;
+  private answers: any[] = [];
+  private answer = new FormControl('', Validators.required);
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private answerService: AnswerService, private fb: FormBuilder, public snackBar: MatSnackBar) {
+    this.form = fb.group({
+      answer: this.answer
+    });
   }
 
+  ngOnInit() {
+    this.answerService.getAnswersById(this.commentId, this.user.api_token).subscribe(data => {
+      this.answers = data;
+    });
+  }
+
+  submitForm(event, value) {
+    this.answerService.addAnswer(this.commentId, value.answer, this.user.api_token).subscribe(
+      answer => {
+        this.answers.unshift(answer);
+        this.openSnackBar(`Your answer successfully added!`, 'Close');
+      },
+      error => {
+        this.openSnackBar(`Something wrong!`, 'Close');
+      }
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
+  }
 }
