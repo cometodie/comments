@@ -14,9 +14,13 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.sideBarService.toggledSideBar.subscribe((toggle: boolean) => {
-      // debugger;
       this.drawer.toggle();
     });
+  }
+
+  toggle(){
+    this.drawer.toggle();
+    this.sideBarService.toggledMenuIcon.next(true);
   }
 
   isAuth(): boolean{

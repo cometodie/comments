@@ -18,6 +18,9 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.loginService.getUser();
+    this.sideBarSerivce.toggledMenuIcon.subscribe(toggle => {
+      this.isOpen = !this.isOpen;
+    })
     this.loginService.updateUser.subscribe(user => {
       this.user = user;
       this.isAuth = true;
