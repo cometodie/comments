@@ -1,3 +1,35 @@
-<p>
-  home works!
-</p>
+<section>
+  <mat-card>
+    <h2>Add comment</h2>
+    <form [formGroup]="form" (submit)="submitForm($event, form.value)">
+      <mat-form-field class="">
+        <input matInput placeholder="Title" formControlName="title" type="text">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>
+      </mat-form-field>
+      <button mat-raised-button type="submit" [disabled]="form.invalid">Add</button>
+    </form>
+    <div class="comments-container">
+      <h2>Comments</h2>
+      <mat-list>
+        <mat-list-item *ngIf="!comments.length">
+          <h3>No Comments, Be the first!</h3>
+        </mat-list-item>
+        <mat-list-item *ngFor="let comment of comments">
+          <span>
+            <b>Title:</b>
+          </span>
+          <span>
+            {{comment.title}}
+          </span>
+          <span>
+            <b>Message:</b>
+          </span>
+          <p>{{comment.message}}</p>
+          <button mat-raised-button (click)="deleteComment(comment)" [disabled]="isOwnComment(comment)">Delete</button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-card>
+</section>

@@ -1,5 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-h1 {
+h1,
+h2,
+h3 {
+  font-family: 'Montserrat', sans-serif !important;
+}
+*:not(h1):not(h2):not(h3) {
   font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+}
+body,
+html {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+.mat-drawer-container {
+  background: #fff;
+  min-height: calc(100% - 64px);
+}
+
+.mat-drawer-content {
+  overflow: unset !important;
 }

@@ -13,24 +13,31 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CommentService } from './services/comment/comment.service';
 import { RegistrationComponent } from './components/auth/registration/registration.component';
+import { ToolBarModule } from './components/layout/toolbar/toolbar.module';
+import { SideBarModule } from './components/layout/sidebar/sidebar.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { LogoutComponent } from './components/auth/logout/logout.component';
+import { LoginService } from './services/login/login.service';
+import { ProfileIconComponent } from './components/layout/icons/profile-icon/profile-icon.component';
+import { MatIconModule } from '@angular/material';
+import { HomeModule } from './components/home/home.module';
 
 const routes: Route[] = [
   {
     path: '',
     component: AppComponent,
     canActivate: [AuthGuard],
-    children:[
-      { path: '', pathMatch: 'full', redirectTo: '/home' }
-    ]
+    children: [{ path: '', pathMatch: 'full', redirectTo: '/home' }]
   },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegistrationComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegistrationComponent, LogoutComponent],
   imports: [
     BrowserModule,
     MatSnackBarModule,
@@ -40,9 +47,14 @@ const routes: Route[] = [
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ToolBarModule,
+    SideBarModule,
+    MatIconModule,
+    HomeModule,
+    MatSidenavModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard,CommentService],
+  providers: [AuthGuard, CommentService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

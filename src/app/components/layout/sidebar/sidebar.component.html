@@ -1,0 +1,22 @@
+<mat-drawer #drawer mode="side">
+  <ul *ngIf="isAuth()">
+    <li [routerLink]="['/home']" (click)="drawer.toggle()">
+      <app-home-icon></app-home-icon>
+      <span>Home</span>
+    </li>
+    <li [routerLink]="['/logout']" (click)="drawer.toggle()">
+      <app-logout-icon></app-logout-icon>
+      <span>Logout</span>
+    </li>
+  </ul>
+  <ul *ngIf="!isAuth()">
+    <li [routerLink]="['/login']" (click)="drawer.toggle()">
+      <app-profile-icon></app-profile-icon>
+      <span>Login</span>
+    </li>
+    <li [routerLink]="['/registration']" (click)="drawer.toggle()">
+      <app-profile-new-icon></app-profile-new-icon>
+      <span>Registration</span>
+    </li>
+  </ul>
+</mat-drawer>

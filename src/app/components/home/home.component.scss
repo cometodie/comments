@@ -1,0 +1,43 @@
+mat-card {
+  max-width: 500px;
+  margin: 100px auto 0;
+  h2,
+  h3 {
+    text-align: center;
+    width: 100%;
+  }
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    textarea {
+      height: 150px;
+      max-height: 150px;
+    }
+    button {
+      width: 150px;
+      margin: 0 auto 15px;
+    }
+  }
+  .comments-container {
+    h2 {
+      margin-top: 25px;
+    }
+    span,
+    p {
+      margin-top: 5px;
+    }
+    button {
+      align-self: flex-end;
+    }
+  }
+}
+:host /deep/ .mat-list-item {
+  height: auto !important;
+}
+:host /deep/ .mat-list-item-content {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  padding: 16px !important;
+  margin: 0 0 50px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
