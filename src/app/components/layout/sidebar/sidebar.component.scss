@@ -9,12 +9,12 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
   border-radius: 0px;
-  position: absolute;
+  position: fixed;
   min-height: 100vh;
   width: 256px;
   z-index: 1200;
   left: 0px;
-  top: -100px;
+  top: 64px;
   overflow: auto;
   visibility: hidden;
 }
