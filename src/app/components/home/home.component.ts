@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { Comment } from '../../models/comment';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-home',
@@ -52,8 +53,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  isOwnComment(comment) {
-    return comment.user.api_token !== this.user.api_token;
+  deleteComment(id) {
+    this.comments = this.comments.filter(el => {
+      return this.getRealId(el) != id;
+    });
+  }
+
+  getRealId(comment) {
+    return comment.hasOwnProperty('id') ? comment.id : comment.comment_id;
   }
 
   submitForm(event, value) {
@@ -67,25 +74,6 @@ export class HomeComponent implements OnInit {
       },
       error => {
         this.openSnackBar(`Something wrong!`, 'Close');
-      }
-    );
-  }
-
-  getReaiId(comment) {
-    return comment.hasOwnProperty('id') ? comment.id : comment.comment_id;
-  }
-
-  deleteComment(comment) {
-    let id = this.getReaiId(comment);
-    this.commentService.deleteComment(id, this.user.api_token).subscribe(
-      result => {
-        this.comments = this.comments.filter(el => {
-          return this.getReaiId(el) != id;
-        });
-        this.openSnackBar(`Comment successfully deleted!`, 'Close');
-      },
-      error => {
-        this.openSnackBar(`You can delete only you'r comment!`, 'Close');
       }
     );
   }

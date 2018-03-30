@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { MatListModule } from '@angular/material/list';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule, MatSnackBarModule, MatSidenavModule } from '@angular/material';
+import { MatIconModule, MatSnackBarModule, MatSidenavModule, MatTooltipModule } from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -23,6 +23,7 @@ import { MatIconModule, MatSnackBarModule, MatSidenavModule } from '@angular/mat
     MatListModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatTooltipModule,
     ReactiveFormsModule
   ],
   exports: [
@@ -37,6 +38,7 @@ import { MatIconModule, MatSnackBarModule, MatSidenavModule } from '@angular/mat
     MatListModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatTooltipModule,
     ReactiveFormsModule
     ],
   providers: []

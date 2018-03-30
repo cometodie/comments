@@ -1,0 +1,15 @@
+<section>
+  <span>
+    <b>Title:</b>
+  </span>
+  <span>
+    {{comment.title}}
+  </span>
+  <span>
+    <b>Message:</b>
+  </span>
+  <p>{{comment.message}}</p>
+  <button mat-raised-button (click)="deleteComment(comment)" [disabled]="isOwnComment(comment)">Delete</button>
+  <mat-divider></mat-divider>
+  <app-answer [commentId]="getRealId(comment)" [user]="user"></app-answer>
+</section>

@@ -5,10 +5,11 @@ import { LoginService } from '../../../services/login/login.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SideBarService } from '../../../services/sidebar/sidebar.service';
+import { SharedModule } from '../../../shared/shared.modules';
 
 @NgModule({
   declarations: [ToolbarComponent],
-  imports: [MatToolbarModule, FormsModule, BrowserModule],
+  imports: [MatToolbarModule, SharedModule],
   exports: [ToolbarComponent],
   providers: [LoginService, SideBarService]
 })

@@ -17,19 +17,7 @@
           <h3>No Comments, Be the first!</h3>
         </mat-list-item>
         <mat-list-item *ngFor="let comment of comments">
-          <span>
-            <b>Title:</b>
-          </span>
-          <span>
-            {{comment.title}}
-          </span>
-          <span>
-            <b>Message:</b>
-          </span>
-          <p>{{comment.message}}</p>
-          <button mat-raised-button (click)="deleteComment(comment)" [disabled]="isOwnComment(comment)">Delete</button>
-          <mat-divider></mat-divider>
-          <app-answer [commentId]="getReaiId(comment)" [user]="user"></app-answer>
+          <app-comment [comment]="comment" [user]="user" (delete)="deleteComment($event)"></app-comment>
         </mat-list-item>
       </mat-list>
     </div>

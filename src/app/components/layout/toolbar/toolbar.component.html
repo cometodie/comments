@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="flex-row">
     <div class="flex-row">
-      <div class="container" (click)="toggleSideBar()" [ngClass]="{'change': isOpen}">
+      <div class="container" matTooltip="Navigation" (click)="toggleSideBar()" [ngClass]="{'change': isOpen}">
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
@@ -9,7 +9,7 @@
       <h1>Comments System</h1>
     </div>
     <div *ngIf="!!user" class="profile-block">
-      <img src="{{getAvatar()}}">
+      <img src="{{getAvatar()}}" matTooltip="{{user.name}}">
       <span>{{user.email}}</span>
     </div>
   </mat-toolbar-row>

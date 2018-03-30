@@ -18,25 +18,12 @@ mat-card {
       margin: 0 auto 15px;
     }
   }
-  .comments-container {
-    h2 {
-      margin-top: 25px;
-    }
-    span,
-    p {
-      margin-top: 5px;
-    }
-    button {
-      align-self: flex-end;
-    }
+  app-comment {
+    width: 100%;
   }
 }
 :host /deep/ .mat-list-item {
   height: auto !important;
-}
-:host /deep/ .mat-divider {
-  position: relative !important;
-  margin-top: 15px !important;
 }
 :host /deep/ .mat-list-item-content {
   flex-direction: column !important;

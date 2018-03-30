@@ -49,7 +49,7 @@ const routes: Route[] = [
     HomeModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard, CommentService, LoginService],
+  providers: [AuthGuard, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
