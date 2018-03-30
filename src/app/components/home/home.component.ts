@@ -1,17 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { CommentService } from '../../services/comment/comment.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { LoginService } from '../../services/login/login.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { Comment } from '../../models/comment';
-import { debug } from 'util';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('commentState', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        animate(
+          300,
+          keyframes([
+            style({ opacity: 0, transform: 'translateX(-100%)', offset: 0 }),
+            style({ opacity: 1, transform: 'translateX(15px)', offset: 0.3 }),
+            style({ opacity: 1, transform: 'translateX(0)', offset: 1.0 })
+          ])
+        )
+      ]),
+      transition('* => void', [
+        animate(
+          300,
+          keyframes([
+            style({ opacity: 1, transform: 'translateX(0)', offset: 0 }),
+            style({ opacity: 1, transform: 'translateX(-15px)', offset: 0.7 }),
+            style({ opacity: 0, transform: 'translateX(100%)', offset: 1.0 })
+          ])
+        )
+      ])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
   form: FormGroup;
@@ -35,9 +61,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.loginService.getUser();
-    this.commentService.getComments(this.user.api_token).subscribe(comments => {
-      this.comments = comments.data;
-    });
+    this.commentService
+      .getComments(this.user.api_token)
+      .subscribe(comments => {
+        this.comments = comments.data;
+      });
   }
 
   ValidateUrl(control: AbstractControl) {
@@ -65,7 +93,8 @@ export class HomeComponent implements OnInit {
 
   submitForm(event, value) {
     this.commentService.addComment(value.title, value.comment, this.user.api_token).subscribe(
-      comment => {
+      (comment: any) => {
+        // comment.state = 'void';
         this.comments.unshift({
           ...comment,
           user: { ...this.user }

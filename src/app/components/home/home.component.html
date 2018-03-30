@@ -16,8 +16,9 @@
         <mat-list-item *ngIf="!comments.length">
           <h3>No Comments, Be the first!</h3>
         </mat-list-item>
-        <mat-list-item *ngFor="let comment of comments">
-          <app-comment [comment]="comment" [user]="user" (delete)="deleteComment($event)"></app-comment>
+        <mat-list-item *ngFor="let comment of comments"  [@commentState]="comment.state">
+          <app-comment [comment]="comment" [user]="user"
+            (delete)="deleteComment($event)"></app-comment>
         </mat-list-item>
       </mat-list>
     </div>
