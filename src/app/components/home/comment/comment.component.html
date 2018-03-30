@@ -9,7 +9,7 @@
     <b>Message:</b>
   </span>
   <p>{{comment.message}}</p>
-  <button mat-raised-button (click)="deleteComment(comment)" [disabled]="isOwnComment(comment)">Delete</button>
+  <button mat-raised-button (click)="deleteComment(comment.comment_id)" [disabled]="isOwnComment(comment.user.api_token)">Delete</button>
   <mat-divider></mat-divider>
-  <app-answer [commentId]="getRealId(comment)" [user]="user"></app-answer>
+  <app-answer [commentId]="comment.comment_id" [user]="user"></app-answer>
 </section>

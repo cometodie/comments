@@ -17,12 +17,8 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {}
 
-  getRealId(comment) {
-    return comment.hasOwnProperty('id') ? comment.id : comment.comment_id;
-  }
-
-  isOwnComment(comment) {
-    return comment.user.api_token !== this.user.api_token;
+  isOwnComment(token) {
+    return token !== this.user.api_token;
   }
 
   openSnackBar(message: string, action: string) {
@@ -31,8 +27,7 @@ export class CommentComponent implements OnInit {
     });
   }
 
-  deleteComment(comment) {
-    let id = this.getRealId(comment);
+  deleteComment(id) {
     this.commentService.deleteComment(id, this.user.api_token).subscribe(
       result => {
         this.delete.emit(id);

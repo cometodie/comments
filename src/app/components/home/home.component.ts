@@ -83,18 +83,17 @@ export class HomeComponent implements OnInit {
 
   deleteComment(id) {
     this.comments = this.comments.filter(el => {
-      return this.getRealId(el) != id;
+      return el.comment_id != id;
     });
   }
 
-  getRealId(comment) {
-    return comment.hasOwnProperty('id') ? comment.id : comment.comment_id;
-  }
-
   submitForm(event, value) {
-    this.commentService.addComment(value.title, value.comment, this.user.api_token).subscribe(
-      (comment: any) => {
-        // comment.state = 'void';
+    this.commentService.addComment(value.title, value.comment, this.user.api_token).pipe(map((el:any) => {
+      el.comment_id = el.id;
+      delete el.id;
+      return el;
+    })).subscribe(
+      (comment:any) => {
         this.comments.unshift({
           ...comment,
           user: { ...this.user }
