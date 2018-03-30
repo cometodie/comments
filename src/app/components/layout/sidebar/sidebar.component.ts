@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
 
   toggle(){
     this.drawer.toggle();
-    this.sideBarService.toggledMenuIcon.next(true);
+    this.sideBarService.toggleMenuIcon();
   }
 
   isAuth(): boolean{
