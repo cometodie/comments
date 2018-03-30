@@ -13,7 +13,7 @@ export class AnswerComponent implements OnInit {
   @Input() commentId: number;
   @Input() user: User;
   form: FormGroup;
-  private answers: any[] = [];
+  public answers: any[] = [];
   private answer = new FormControl('', Validators.required);
 
   constructor(private answerService: AnswerService, private fb: FormBuilder, public snackBar: MatSnackBar) {

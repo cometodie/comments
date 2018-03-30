@@ -9,9 +9,9 @@ import { SideBarService } from '../../../services/sidebar/sidebar.service';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  private user: User = null;
-  private isAuth: boolean = false;
-  private isOpen: boolean = false;
+  public user: User = null;
+  public isAuth: boolean = false;
+  public isOpen: boolean = false;
   @ViewChild('drawer') drawer;
 
   constructor(private loginService: LoginService, private sideBarSerivce: SideBarService) {}

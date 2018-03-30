@@ -41,8 +41,8 @@ import { map } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
   form: FormGroup;
-  private user: User = null;
-  private comments: any[] = [];
+  public user: User = null;
+  public comments: any[] = [];
 
   private title = new FormControl('', [Validators.required, this.ValidateUrl]);
   private comment = new FormControl('', Validators.required);
