@@ -10,7 +10,7 @@ export class CommentService {
   public socket;
 
   constructor(private httpClient: HttpClient) {
-    // this.socket = io(this.url); 
+    this.socket = io(this.url); 
   }
 
   public getComments(api_token: string): Observable<any> {
@@ -25,16 +25,28 @@ export class CommentService {
     return this.httpClient.delete(`${environment.api_url}/comment/${id_comment}?api_token=${api_token}`);
   }
 
-  // public getMessages(){
-  //   const observable = new Observable(observer => {
-  //     this.socket.on('public-push', data => {
-  //       debugger;
-  //     })
-  //     return () => {
-  //       this.socket.disconnect();
-  //     };
-  //   })
-  //   return observable;
-  // }
+  getMessages(){
+    const observable = new Observable(observer => {
+      this.socket.emit(`public-push`, data => {
+        debugger;
+      })
+      return () => {
+        this.socket.disconnect();
+      };
+    })
+    return observable;
+  }
+
+  public sendMessage(){
+    const observable = new Observable(observer => {
+      this.socket.emit(`push/wl2AknXY5i89dy6jd62e`, {title:'test', message:'msggg'}, () => {
+        debugger;
+      })
+      return () => {
+        this.socket.disconnect();
+      };
+    })
+    return observable;
+  }
 
 }
