@@ -66,12 +66,10 @@ export class HomeComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments.data;
       });
-      this.commentService.sendMessage().subscribe(data=>{
-        debugger;
-      })
-    this.commentService.getMessages().subscribe(data => {
-      debugger;
-    })
+      // this.commentService.sendMessage().subscribe(data=>{
+      //   debugger;
+      // })
+    this.commentService.getMessages();
   }
 
   ValidateUrl(control: AbstractControl) {
