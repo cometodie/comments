@@ -3,26 +3,30 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import * as Echo from 'laravel-echo';
+import { LoginService } from '../login/login.service';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class CommentService {
   public url = 'http://pusher.cpl.by:6020';
   public socket;
-  private echo: any;
+  private token;
+  public echo: any;
 
-  constructor(private httpClient: HttpClient) {
-     
+  public publicChannel:Subject<any> = new Subject<any>();
+
+  constructor(private httpClient: HttpClient, private loginService: LoginService) {
+    this.token = loginService.getUser().api_token;
     this.echo = new Echo({
       broadcaster: 'socket.io',
       host: this.url,
       auth: {
         headers: {
-          Authorization: 'saidydsyuaXY5i89dy6jd62e',
+          Authorization: this.token,
         },
       },
     })
-    console.log(this.echo);
-    this.getMessages();
+    this.publicPushChannel();
   }
 
   public getComments(api_token: string): Observable<any> {
@@ -37,13 +41,11 @@ export class CommentService {
     return this.httpClient.delete(`${environment.api_url}/comment/${id_comment}?api_token=${api_token}`);
   }
 
-  getMessages() {
+  private publicPushChannel() {
     this.echo.channel(`public-push`)
-    .listen('PublicPush', (e) => {
-        console.log(e);
-        debugger;
+    .listen('PublicPush', (comment) => {
+        console.log(comment);
+        this.publicChannel.next(comment);
     });
   }
-
-  public sendMessage() {}
 }

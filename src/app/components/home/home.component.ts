@@ -57,19 +57,32 @@ export class HomeComponent implements OnInit {
       title: this.title,
       comment: this.comment
     });
+    commentService.publicChannel.subscribe((action: any) => {
+      switch (action.action) {
+        case 'comment_added':
+          action.comment.comment_id = action.comment.id;
+          delete action.comment.id;
+          this.comments.unshift({
+            ...action.comment,
+            user: { ...this.user }
+          });
+          break;
+        case 'comment_delete':
+          this.deleteComment(action.comment_id);
+          break;
+      }
+    });
   }
 
   ngOnInit() {
     this.user = this.loginService.getUser();
-    this.commentService
-      .getComments(this.user.api_token)
-      .subscribe(comments => {
-        this.comments = comments.data;
-      });
-      // this.commentService.sendMessage().subscribe(data=>{
-      //   debugger;
-      // })
-    this.commentService.getMessages();
+    this.commentService.getComments(this.user.api_token).subscribe(comments => {
+      this.comments = comments.data;
+    });
+    // this.commentService.sendMessage().subscribe(data=>{
+    //   debugger;
+    // })
+    // this.commentService.getMessages();
   }
 
   ValidateUrl(control: AbstractControl) {
@@ -92,21 +105,22 @@ export class HomeComponent implements OnInit {
   }
 
   submitForm(event, value) {
-    this.commentService.addComment(value.title, value.comment, this.user.api_token).pipe(map((el:any) => {
-      el.comment_id = el.id;
-      delete el.id;
-      return el;
-    })).subscribe(
-      (comment:any) => {
-        this.comments.unshift({
-          ...comment,
-          user: { ...this.user }
-        });
-        this.openSnackBar(`Your comment successfully added!`, 'Close');
-      },
-      error => {
-        this.openSnackBar(`Something wrong!`, 'Close');
-      }
-    );
+    this.commentService
+      .addComment(value.title, value.comment, this.user.api_token)
+      .pipe(
+        map((el: any) => {
+          el.comment_id = el.id;
+          delete el.id;
+          return el;
+        })
+      )
+      .subscribe(
+        (comment: any) => {
+          this.openSnackBar(`Your comment successfully added!`, 'Close');
+        },
+        error => {
+          this.openSnackBar(`Something wrong!`, 'Close');
+        }
+      );
   }
 }

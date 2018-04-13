@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material';
 export class AnswerComponent implements OnInit {
   @Input() commentId: number;
   @Input() user: User;
+  @Input() newAnswer: any;
   form: FormGroup;
   public answers: any[] = [];
   private answer = new FormControl('', Validators.required);
@@ -20,6 +21,11 @@ export class AnswerComponent implements OnInit {
     this.form = fb.group({
       answer: this.answer
     });
+    answerService.privateChannel.subscribe((action: any) => {
+      if(this.commentId == action.data.answer.comment_id){
+        this.answers.unshift(action.data.answer);
+      }
+    })
   }
 
   ngOnInit() {

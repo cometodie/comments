@@ -13,7 +13,9 @@ export class CommentComponent implements OnInit {
   @Input() user: User;
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private commentService: CommentService, public snackBar: MatSnackBar) {}
+  constructor(private commentService: CommentService, public snackBar: MatSnackBar) {
+    console.log(this.comment);
+  }
 
   ngOnInit() {}
 
